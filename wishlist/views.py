@@ -18,10 +18,11 @@ from django.urls import reverse
 def show_wishlist(request):
     data_wishlist_item = ItemWishlist.objects.all()
     context = {
-    'list_item': data_wishlist_item   ,
+    'list_item': data_wishlist_item  ,
     'name': 'Irsyad Mufid',
     'last_login': request.COOKIES['last_login'],
 }
+
     return render(request, "wishlist.html", context)
 
 def register(request):
@@ -52,12 +53,14 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)   
 
+
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('wishlist:login'))
     response.delete_cookie('last_login')
     return response
-    
+
+
 def show_xml(request):
     data = ItemWishlist.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
