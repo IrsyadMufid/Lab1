@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<div class="bg-image" 
+     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+            height: 100vh">
+<nav class="navbar navbar-expand-lg bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Wishlist</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="{% url 'wishlist:logout' %}">Logout</a>
+      </div>
+        <span class="navbar-text">
+          {{ user.get_username }}
+        </span>
+    </div>
+  </div>
+</nav>
+
+
+<div class="m-5 d-flex flex-column justify-content-center align-items-center">
 <h5>Name: </h5>
 <p><b>{{name}}</b>
 </p>
 
-<table>
+<table class="table table-success table-striped">
     <tr>
     <th>Item Name</th>
     <th>Item Price</th>
@@ -23,6 +47,6 @@
 
 </table>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
-
+<div>
+</div>
 {% endblock content %}
