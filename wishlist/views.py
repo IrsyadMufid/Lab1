@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-data_wishlist_item.o
+
 # Create your views here.
 @login_required(login_url='/wishlist/login/')
 def show_wishlist(request):
