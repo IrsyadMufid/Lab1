@@ -11,8 +11,9 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
-
+data_wishlist_item.o
 # Create your views here.
 @login_required(login_url='/wishlist/login/')
 def show_wishlist(request):
@@ -24,6 +25,29 @@ def show_wishlist(request):
 }
 
     return render(request, "wishlist.html", context)
+
+@login_required(login_url='/wishlist/login/')
+def show_wishlist_ajax(request):
+    data_wishlist_item = ItemWishlist.objects.all()
+    context = {
+    'name': 'Irsyad Mufid',
+    'last_login': request.COOKIES['last_login'],
+}
+    return render(request, "wishlist_ajax.html",context)
+
+@csrf_exempt
+@login_required(login_url="/wishlist/login/")
+def add_wishlist_ajax(request):
+    if request.method == "POST":
+        item_name = request.POST.get("item_name")
+        print(item_name)
+        item_price = request.POST.get("item_price")
+        description = request.POST.get("description")
+        ItemWishlist.objects.create(
+            item_name = item_name, item_price = item_price, description = description
+        )
+        JsonResponse({}, status=200)
+    return redirect("wishlist:show_wishlist_ajax")
 
 def register(request):
     form = UserCreationForm()
